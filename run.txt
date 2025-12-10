@@ -1,0 +1,22 @@
+php -S localhost:8000 -t views
+
+nodemon server.js
+
+http://localhost/ecommerce-project1.2/views/index.php
+
+
+
+
+หน้าหลัก	http://localhost/ecommerce-project/views/index.php
+เข้าสู่ระบบ	http://localhost/ecommerce-project/views/login.php
+สมัครสมาชิก	http://localhost/ecommerce-project/views/register.php
+ตะกร้าสินค้า	http://localhost/ecommerce-project/views/cart.php
+ชำระเงิน	http://localhost/ecommerce-project/views/checkout.php
+Admin Panel	http://localhost/ecommerce-project/admin/dashboard.php
+
+
+
+
+checkout.php (หน้าส่งไป Stripe)
+stripe_checkout.php (สร้าง Stripe Payment Session)
+order_success.php (บันทึกคำสั่งซื้อสำเร็จ)

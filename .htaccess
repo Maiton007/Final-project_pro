@@ -1,0 +1,23 @@
+RewriteEngine On
+RewriteBase /ecommerce-project/
+
+# อนุญาตให้เข้าถึงไฟล์จริง
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# ตั้งค่าให้ index.php เป็นหน้าแรก
+RewriteRule ^$ views/index.php [L]
+
+# ตั้งค่าให้ admin เข้าถึงถูกต้อง
+RewriteRule ^admin/(.*)$ views/admin/$1 [L]
+
+<IfModule mod_headers.c>
+    Header set Access-Control-Allow-Origin "*"
+</IfModule>
+
+
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]

@@ -1,0 +1,229 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+    line-height: 1.6;
+    font-size: 1rem;
+}
+
+/* Admin Container */
+.admin-container {
+    width: 80%;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+/* Heading */
+h2 {
+    color: #2c3e50;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Form Styles */
+form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+input[type="text"],
+input[type="number"],
+textarea,
+input[type="file"] {
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+textarea {
+    min-height: 150px;
+    resize: vertical;
+}
+
+button[type="submit"],
+button[type="button"] {
+    background-color: #2ecc71;
+    /* สีเขียวสด */
+    color: white;
+    padding: 12px 20px;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+button[type="submit"]:hover,
+button[type="button"]:hover {
+    background-color: #27ae60;
+    /* สีเขียวเข้ม */
+}
+
+button[type="submit"]:active,
+button[type="button"]:active {
+    background-color: #1e8449;
+    /* สีเขียวเข้มที่สุด */
+}
+
+/* Error Message */
+.error-message {
+    color: #e74c3c;
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #f9dada;
+    border-radius: 4px;
+}
+
+/* เพิ่มขนาดแท็กให้เล็กลงและดูทันสมัย */
+.tag {
+    background-color: #2ecc71;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 20px;
+    display: inline-block;
+    font-size: 0.9rem;
+    /* ลดขนาดฟอนต์ */
+    margin-right: 8px;
+    /* เว้นระยะระหว่างแท็ก */
+    margin-bottom: 8px;
+    /* เว้นระยะระหว่างบรรทัด */
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.tag:hover {
+    background-color: #27ae60;
+    transform: scale(1.1);
+    /* ขยายขนาดเล็กน้อยเมื่อ hover */
+}
+
+.tag button {
+    background-color: transparent;
+    border: none;
+    color: white;
+    font-size: 1rem;
+    margin-left: 6px;
+    cursor: pointer;
+    padding: 0;
+    transition: color 0.3s ease;
+}
+
+.tag button:hover {
+    color: #e74c3c;
+    /* สีของปุ่มลบเมื่อ hover */
+}
+
+/* ปรับฟอร์มแท็กที่เพิ่มมาใหม่ */
+.tag-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    /* เพิ่มระยะห่างระหว่างแท็ก */
+    margin-top: 20px;
+}
+
+/* ลดขนาดของแท็กที่ถูกเพิ่มมาใหม่ */
+.tag-container .tag {
+    background-color: #3498db;
+    font-size: 0.8rem;
+    /* ขนาดเล็กกว่าปกติ */
+    padding: 4px 8px;
+    /* ลดขนาด padding */
+}
+
+
+/* Sidebar Styling */
+.admin-sidebar {
+    background-color: #34495e;
+    color: white;
+    padding: 20px;
+    font-size: 1.1rem;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    box-shadow: 2px 0 15px rgba(0, 0, 0, 0.2);
+}
+
+.admin-sidebar a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 4px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.admin-sidebar a:hover {
+    background-color: #2980b9;
+}
+
+/* Content Area */
+.admin-content {
+    margin-left: 270px; /* Adjust to match sidebar */
+    padding: 20px;
+    max-width: 900px;
+    width: 100%;
+}
+
+/* Tags Section */
+.existing-tags {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #ecf0f1;
+    border-radius: 8px;
+}
+
+.existing-tags .tag {
+    background-color: #1abc9c;
+    /* สีเขียวเข้ม */
+}
+
+/* จัดตำแหน่งและตกแต่งข้อความแจ้งเตือน */
+.alert-success {
+    background-color: #28a745; /* สีเขียว */
+    color: white;
+    padding: 15px;
+    border-radius: 5px;
+    margin: 20px 0;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    width: 80%;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
+
+/* กรณีที่ข้อความหายไป */
+.alert-success.hide {
+    opacity: 0;
+    display: none;
+}
+

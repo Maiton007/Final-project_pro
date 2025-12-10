@@ -1,0 +1,147 @@
+/* ============================
+   หน้าแรก (index.php) - home.css
+   ============================ */
+
+/* รีเซ็ตพื้นฐานของหน้าหลัก */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+/* ปรับขนาด container ให้กึ่งกลาง */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+}
+
+/* Header ของหน้า HOME เท่านั้น
+   (อย่าลืมใช้ <header class="home-header"> ใน index.php) */
+.home-header {
+    text-align: center;
+    padding: 20px;
+    background-color: #2e7d32;
+    color: white;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+/* แบนเนอร์ด้านบน */
+.banner {
+    text-align: center;
+    padding: 50px 20px;
+    background: #388e3c;
+    color: white;
+    font-size: 24px;
+}
+
+/* โซนแสดงสินค้า */
+.products {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 20px;
+}
+
+/* Grid Layout สำหรับรายการสินค้า */
+.product-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+}
+
+/* การ์ดสินค้า */
+.product-card {
+    background-color: white;
+    border-radius: 12px;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.product-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* รูปสินค้า */
+.product-image {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 8px;
+    transition: transform 0.3s;
+}
+
+.product-card:hover .product-image {
+    transform: scale(1.05);
+}
+
+/* ชื่อสินค้า */
+.product-card h3 {
+    font-size: 20px;
+    margin: 10px 0;
+    font-weight: bold;
+    color: #333;
+}
+
+/* ข้อความทั่ว ๆ ไปในการ์ด (รวมราคาด้วย) */
+.product-card p {
+    font-size: 18px;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+/* รายละเอียดสินค้า (ข้อความยาว) */
+.product-description {
+    font-size: 14px;
+    color: #555;
+    margin: 8px 0;
+    line-height: 1.4;
+    min-height: 40px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* ปุ่มเพิ่มลงตะกร้า */
+button {
+    background-color: #2e7d32;
+    color: white;
+    border: none;
+    padding: 12px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.3s ease-in-out, transform 0.2s;
+    display: inline-block;
+}
+
+button:hover {
+    background-color: #1b5e20;
+    transform: scale(1.05);
+}
+
+/* ข้อความกรณีไม่มีสินค้า */
+.no-products {
+    text-align: center;
+    padding: 2rem;
+    color: #777;
+    font-size: 16px;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 15px;
+    background-color: #2e7d32;
+    color: white;
+    font-size: 14px;
+    margin-top: 30px;
+}

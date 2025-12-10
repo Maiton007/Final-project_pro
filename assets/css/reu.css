@@ -1,0 +1,80 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f7f7f7;
+    
+    margin: 0;
+    padding: 0rem 2rem 0rem 0rem ;
+    
+}
+
+.form-container {
+    max-width: 600px;
+    
+    padding: 2rem;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin: 40px auto 0; /* เพิ่ม margin-top เพื่อเว้นระยะห่างจากด้านบน */
+    
+}
+
+h2 {
+    text-align: center;
+    color: #333;
+}
+
+h3 {
+    margin-top: 20px;
+    color: #333;
+}
+
+.input-group {
+    margin-bottom: 1rem;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #555;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    width: 100%;
+    padding: 0.8rem;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+#debugoutput {
+    margin-top: 20px;
+    font-size: 0.9rem;
+}
+
+
+#error-message {
+    display:none;
+    background-color: #ffe0e0;
+    color: #d10000;
+    padding: 1rem;
+    margin: 1rem auto;
+    max-width: 600px;
+    border: 1px solid #d10000;
+    border-radius: 6px;
+    font-size: 1rem;
+    text-align: center;
+}
+
