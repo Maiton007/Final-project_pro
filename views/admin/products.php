@@ -56,17 +56,24 @@ $result = $conn->query($sql);
 
                             <td>
                                 <img src="<?= htmlspecialchars($imgPath) ?>"
-                                     alt="รูปสินค้า"
-                                     class="product-image"
-                                     style="width:80px; height:auto; border-radius:4px;">
+                                    alt="รูปสินค้า"
+                                    class="product-image"
+                                    style="width:80px; height:auto; border-radius:4px;">
                             </td>
 
                             <td class="actions">
                                 <a href="edit_product.php?id=<?= $row['id'] ?>">แก้ไข</a>
-                                <a href="delete_product.php?id=<?= $row['id'] ?>"
-                                   class="delete"
-                                   onclick="return confirm('คุณแน่ใจที่จะลบสินค้านี้?');">ลบ</a>
+                                <form method="post"
+                                    action="delete_product.php"
+                                    style="display:inline;"
+                                    onsubmit="return confirm('คุณแน่ใจที่จะลบสินค้านี้?');">
+                                    <input type="hidden" name="id" value="<?= $row['id'] ?>">
+                                    <button type="submit" class="delete">
+                                        ลบ
+                                    </button>
+                                </form>
                             </td>
+
                         </tr>
                     <?php endwhile; ?>
                 </tbody>

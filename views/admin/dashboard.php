@@ -1,4 +1,5 @@
 <?php
+// ไฟล์: dashboard.php (แทนที่ทั้งไฟล์ได้เลย)
 session_start();
 require_once __DIR__ . "/../../config/database.php";
 
@@ -59,6 +60,34 @@ $orderCountYear = fetchOne(
      FROM orders 
      WHERE YEAR(created_at) = '$year'"
 );
+
+// ================== กราฟรายได้รายเดือน (12 เดือนล่าสุด) ================== //
+$monthlyRevenueLabels = [];
+$monthlyRevenueData   = [];
+
+$revStmt = $conn->prepare("
+    SELECT 
+        DATE_FORMAT(created_at, '%Y-%m') AS ym,
+        IFNULL(SUM(total_price),0) AS revenue
+    FROM orders
+    WHERE created_at >= DATE_FORMAT(DATE_SUB(CURDATE(), INTERVAL 11 MONTH), '%Y-%m-01')
+    GROUP BY ym
+    ORDER BY ym ASC
+");
+$revStmt->execute();
+$revRes = $revStmt->get_result();
+
+$revMap = [];
+while ($r = $revRes->fetch_assoc()) {
+    $revMap[$r['ym']] = (float)$r['revenue'];
+}
+$revStmt->close();
+
+for ($i = 11; $i >= 0; $i--) {
+    $ym = date('Y-m', strtotime("-$i month"));
+    $monthlyRevenueLabels[] = $ym;
+    $monthlyRevenueData[]   = isset($revMap[$ym]) ? $revMap[$ym] : 0;
+}
 
 // ================== ส่วนสรุป STOCK สินค้า ================== //
 
@@ -162,6 +191,19 @@ if ($tpRes) {
             font-size: 1.5rem;
             font-weight: bold;
             color: #333;
+        }
+
+        .chart-card {
+            background: #fff;
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,.08);
+        }
+
+        .chart-wrap {
+            width: 100%;
+            height: 360px;
         }
 
         table {
@@ -279,8 +321,16 @@ if ($tpRes) {
             </div>
 
             <div class="card">
-                <h4>จำนวนสินค้าใกล้หมดสต็อก (≤ <?= $lowStockThreshold ?> ชิ้น)</h4>
+                <h4>จำนวนสินค้าใกล้หมดสต็อก (น้อยกว่า <?= $lowStockThreshold ?> ชิ้น)</h4>
                 <p><?= number_format($lowStockCount) ?> รายการ</p>
+            </div>
+        </div>
+
+        <!-- กราฟรายได้รายเดือน -->
+        <h3>กราฟรายได้รายเดือน (12 เดือนล่าสุด)</h3>
+        <div class="chart-card">
+            <div class="chart-wrap">
+                <canvas id="revenueMonthlyChart"></canvas>
             </div>
         </div>
 
@@ -311,7 +361,7 @@ if ($tpRes) {
             </tbody>
         </table>
 
-        <!-- ⭐ ตารางสินค้าใกล้หมดสต็อก -->
+        <!--  ตารางสินค้าใกล้หมดสต็อก -->
         <h3>สินค้าใกล้หมดสต็อก </h3>
         <table>
             <thead>
@@ -355,6 +405,54 @@ if ($tpRes) {
         </table>
 
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const monthlyLabels = <?= json_encode($monthlyRevenueLabels, JSON_UNESCAPED_UNICODE) ?>;
+        const monthlyData   = <?= json_encode($monthlyRevenueData, JSON_UNESCAPED_UNICODE) ?>;
+
+        const canvas = document.getElementById('revenueMonthlyChart');
+        if (canvas) {
+            const ctx = canvas.getContext('2d');
+
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: monthlyLabels,
+                    datasets: [{
+                        label: 'รายได้ (บาท)',
+                        data: monthlyData,
+                        tension: 0.25,
+                        fill: false
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: (context) => {
+                                    const v = context.raw ?? 0;
+                                    return 'รายได้: ฿' + Number(v).toLocaleString('th-TH', {
+                                        minimumFractionDigits: 2,
+                                        maximumFractionDigits: 2
+                                    });
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            ticks: {
+                                callback: (value) => '฿' + Number(value).toLocaleString('th-TH')
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    </script>
 </body>
 
 </html>
